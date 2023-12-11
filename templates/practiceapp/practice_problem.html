@@ -1,0 +1,58 @@
+{% extends 'userapp/base_with_sidebar.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - {{program_data.heading}}</title>
+<meta name="description" content="{{program_data.heading}}|slice:':140'}}">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+
+
+{% block sidebar %}
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    {% for i in program_list %}
+    <a href="{% url 'program_data' sub.id i.id %}">{{i.heading}}</a>
+    {% endfor %}
+  
+    
+</div>
+{% endblock %}
+
+
+
+{% block content_in %}
+
+
+    <h2 style="text-align: center;color: #e25f30;"> {{sub.name}}</h2>
+    
+
+
+
+    {% if program_data %}
+    <h3 style="text-align: center;">{{program_data.heading}}</h3>
+    <div style="margin-left:6%;margin-right: 6%;">
+    <pre style="padding-left: 10%;padding-right: 10%;">{{program_data.program}}<br><hr>
+        {% if program_data.image %}
+        
+        <img src="/media/{{program_data.image}}" width="50%"><br>
+        {% endif %}
+
+    </pre>
+
+    </div>
+    {% else %}
+    <div >
+    <p style="text-align: center;margin-left: 20%;margin-right: 20%;">{{sub.description}}</p>
+    <br><br>
+    <hr>
+    <h1 style="text-align: center;color: #e25f30;">TOPICS</h1><hr>
+    {% for i in program_list %}
+    <center>
+    <a href="{% url 'program_data' sub.id i.id %}">{{i.heading}}</a><hr>
+    </center>
+    {% endfor %}
+    </div>
+    {% endif %}
+
+{% endblock %}

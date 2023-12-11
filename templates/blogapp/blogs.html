@@ -1,0 +1,114 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% load social_share %}
+
+
+
+{% block page_title %}
+<title> TOPPROJECTWORLD - Blogs</title>
+<meta name="description" content="Here are the all blogs related to Computer Science Engineering this gives detailed knowledge and help to improve your skill and solving Problems.">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+
+{% block extra_css %}
+
+
+{% endblock %}
+{% block main_content %}
+
+     <!--SECTION START-->
+     <section>
+        <div class="container com-sp">
+            <div class="row">
+                <div class="cor about-sp">
+                    <div class="ed-about-tit">
+                        <div class="con-title">
+                            <h2>Blog <span> Posts</span></h2>
+                        </div>
+                        <div>
+                            <div class="ho-event pg-eve-main pg-blog" style="width: 100%;">
+                                <ul>
+
+                                    {% for i in blog %}
+                                    <li>
+                                        <div class="ho-ev-date pg-eve-date"><span>{{i.created_date}}</span>
+                                        </div>
+                                        <div class="pg-eve-desc pg-blog-desc">
+                                            <a href="{% url 'blogs_detail' i.id %}">
+                                                <h4>{{i.heading}}</h4>
+                                            </a>
+                                            <a href="{% url 'blogs_detail' i.id %}">
+											<img src="/media/{{i.image}}" alt="">
+                                            </a>
+											<div class="share-btn blog-share-btn">
+												<ul>
+                                                    <li>
+                                                        {% post_to_facebook "Project : {{project.name}}. Please Visit Once !" object_or_url  %}
+                                                    </li>
+            
+                                                    <li>
+                                                        {% post_to_twitter "Project : {{project.name}}. Please Visit Once !" object_or_url  %}          
+                                                    </li>
+            
+                                                    <li>
+                                                        {% post_to_telegram "Project : {{project.name}}. Please Visit Once !" object_or_url  %}          
+                                                    </li>
+            
+                                                    <li>
+                                                        {% post_to_linkedin object_or_url "Linkedin" %}          
+                                                    </li>
+												</ul>
+											</div>
+                                            <p>{{i.description|slice:":500"}}</p>
+
+                                        </div>
+                                        <!-- <center> -->
+                                        <div class="pg-blog-desc">
+                                            <a class="btn" style="color: white;background-color: #e25f30;" href="{% url 'blogs_detail' i.id %}">Read more</a>
+                                        </div>
+                                        <!-- </center> -->
+                                    </li>
+                                    {% endfor  %}
+
+
+
+
+
+                                    
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="pg-pagina">
+                            <center>
+     
+
+                                <div class="pagination">
+                                  <span class="step-links">
+                                      {% if blog.has_previous %}
+                                          <a class="btn btn-primary" href="?page=1">&laquo; first</a>
+                                          <a class="btn btn-success" href="?page={{ blog.previous_page_number }}">previous</a>
+                                      {% endif %}
+                              
+                                      <span class="current">
+                                         <button class="btn btn-warning"> Page {{ blog.number }} of {{ blog.paginator.num_pages }}.</button>
+                                      </span>
+                              
+                                      {% if blog.has_next %}
+                                          <a class="btn btn-success" href="?page={{ blog.next_page_number }}">next</a>
+                                          <a class="btn btn-primary" href="?page={{ blog.paginator.num_pages }}">last &raquo;</a>
+                                      {% endif %}
+                                  </span>
+                              </div>
+                              </center>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--SECTION END-->
+
+
+
+{% endblock %}

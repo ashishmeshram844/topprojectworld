@@ -1,0 +1,76 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+{% load social_share %}
+
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - {{blog_detail.sel_blog.heading}}</title>
+<meta name="description" content="{{blog_detail.sel_blog.description|slice:':140'}}">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+{% block extra_css %}
+
+
+{% endblock %}
+{% block main_content %}
+
+    <!--SECTION START-->
+    <section>
+        <div class="container com-sp">
+            <div class="row">
+                <div class="cor about-sp">
+                    <div class="ed-about-tit">
+                        <div class="con-title">
+                            <h2>{{blog_detail.sel_blog.heading}}</h2>
+                        </div>
+                        <div>
+                            <div class="ho-event pg-eve-main pg-blog" style="width: 100%;">
+                                <ul>
+									 <li>
+                                        <div class="ho-ev-date pg-eve-date"><span>{{blog_detail.created_date}}</span>
+                                        </div>
+                                        <div class="pg-eve-desc pg-blog-desc">
+                                            <a href="#">
+                                                <h4>{{blog_detail.sel_blog.heading}}</h4>
+                                            </a>
+											<div class="share-btn blog-share-btn">
+												<ul>
+													
+                                                    <li>
+                                                        {% post_to_facebook "Project : {{project.name}}. Please Visit Once !" object_or_url  %}
+                                                    </li>
+            
+                                                    <li>
+                                                        {% post_to_twitter "Project : {{project.name}}. Please Visit Once !" object_or_url  %}          
+                                                    </li>
+            
+                                                    <li>
+                                                        {% post_to_telegram "Project : {{project.name}}. Please Visit Once !" object_or_url  %}          
+                                                    </li>
+            
+                                                    <li>
+                                                        {% post_to_linkedin object_or_url "Linkedin" %}          
+                                                    </li>
+												</ul>
+											</div>
+											<img src="/media/{{blog_detail.sel_blog.image}}" alt="">
+                                           
+                                                   
+                                                    {{blog_detail.write_blog|safe}}
+                                     
+                                            
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                       
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--SECTION END-->
+
+
+{% endblock %}

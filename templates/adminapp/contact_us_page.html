@@ -1,0 +1,95 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add Contact Us detail</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="title"><strong class="d-block">Add New User Form</strong><span class="d-block">Lorem ipsum dolor sit amet consectetur.</span></div>
+                <div class="block-body">
+      
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_contact_us_page' contact.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                          <label class="form-control-label">Address 1 </label>
+                          <input type="text" value="{{contact.address1}}" placeholder="enter address 1" name="address1" class="form-control">
+                        </div>
+  
+                        <div class="form-group">
+                            <label class="form-control-label">Address 2</label>
+                            <input type="text" value="{{contact.address2}}" placeholder="address2" name="address2" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Mobile 1</label>
+                            <input type="text" value="{{contact.mobile1}}" placeholder="mobile1" name="mobile1" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Mobile 2</label>
+                            <input type="text" value="{{contact.mobile2}}" placeholder="mobile2" name="mobile2" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Mobile 3</label>
+                            <input type="text" value="{{contact.mobile3}}" placeholder="mobile3" name="mobile3" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Website 1</label>
+                            <input type="text" value="{{contact.website1}}" placeholder="website1" name="website1" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Website 2</label>
+                            <input type="text" value="{{contact.website2}}" placeholder="website2" name="website2" class="form-control">
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-control-label">Website 3</label>
+                            <input type="text" value="{{contact.website3}}" placeholder="website3" name="website3" class="form-control">
+                        </div>
+                     
+                     
+    
+                    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE CONTACT US PAGE" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+
+                  
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

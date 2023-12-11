@@ -1,0 +1,206 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+
+
+<!-- DATATABLE -->
+<link rel="shortcut icon" href="{% static 'admin/datatable/jquery.dataTables.min.css' %}">
+
+ <!-- DATATABLES -->
+
+ <script src="https://cdn.datatables.net/1.10.24/js/jquery.dataTables.min.js"></script>
+ <script src="https://cdn.datatables.net/1.10.24/js/dataTables.bootstrap4.min.js"></script>
+
+ <!-- EXPORT DATATABLE -->
+ <script src="https://cdn.datatables.net/buttons/1.7.1/js/dataTables.buttons.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+ <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.html5.min.js"></script>
+ <script src="https://cdn.datatables.net/buttons/1.7.1/js/buttons.print.min.js"></script>
+ <!-- END EXPORT -->
+
+  <!-- DataTables CSS -->
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.10.24/css/dataTables.bootstrap4.min.css"/>
+
+  <link rel="stylesheet" href="https://cdn.datatables.net/buttons/1.7.1/css/buttons.dataTables.min.css"/>
+
+
+  
+ 
+
+
+
+
+<style>
+    .top-left {
+  position: absolute;
+  top: 8px;
+  left: 16px;
+}
+</style>
+
+{% block main_content %}
+
+    <!--SECTION START-->
+    <section>
+        
+        <div class="pro-cover" style="background-image: url({% static 'images/cover.jpg' %});">
+        </div>
+        {% block dashboard_topbar %}
+        <div class="pro-menu" style="background-color: black;">
+            
+            <div class="container">
+                <div class="col-md-9 col-md-offset-3">
+                    <ul>
+                        <li><a href="{% url 'student_dashboard' %}" class="">My Dashboard</a></li>
+                        <li><a href="{% url 'student_profile' %}">Profile</a></li>
+                        <li><a href="{% url 'student_purchased_project' %}">Purchased Projects</a></li>
+
+                        <li><a href="{% url 'student_bookmarks' %}">My Bookmarks</a></li>
+                        
+                    </ul>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+        <div class="stu-db">
+            <div class="container pg-inn">
+                {% block dashboard_sidemenu %}
+                <div class="col-md-3">
+                    <div class="pro-user">
+                        {% if user.student_account.photo %}
+                        <img src="/media/{{user.student_account.photo}}" alt="user">
+                        {% else %}
+                        <img src="{% static 'images/demo_image.jpg' %}" alt="user">
+                        {% endif %}
+                        <!-- UPLOAD FILE CODE -->
+                        <!-- Button trigger modal -->
+                        <center>
+                            <button type="button" style="opacity: 0.7;background-color: #f36b3b;" class="btn" data-toggle="modal" data-target="#exampleModalCenter">
+                                Upload new Photo
+                              </button>
+                            </center><br>
+                        <!-- END UPLOAD FILE CODE -->
+                    </div>
+                    <div class="pro-user-bio">
+                        <ul>
+                            <li>
+                                <h4>{{user.username}}</h4>
+                                <h5>{{user.student_account.fullname}}</h5>
+                            </li>
+                            <li>Email : {{user.email}}</li>
+                            <li>Address : {{user.student_account.address}}, {{user.student_account.state}}, {{user.student_account.country}}</li>
+                            <li>Mobile : {{user.student_account.mobile}}</li>
+                        </ul><br><hr>
+                        <div>
+                            <center>
+                            <a href="{% url 'change_student_password' %}" class="btn" style="background-color: #f36b3b;">CHANGE PASSWORD</a>
+                            <center>
+                        </div>
+                    </div>
+                </div>
+                {% endblock %}
+
+                <div class="col-md-9">
+                    {% block dashboard_content %}
+                    
+                        <h1>Dashboard content</h1>
+
+                    {% endblock %}
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--SECTION END-->
+
+
+
+    <!-- Modal Upload file -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Upload New Profile Picture</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            </div>
+
+
+
+            <form action="{% url 'profile_pic_upload' %}" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+            <div class="modal-body">
+                    <center>
+                    <div class="form-group">
+                      <label for="exampleFormControlFile1">Choose Photo</label><br>
+                      <input type="file" class="form-control-file" name="photo" id="exampleFormControlFile1">
+                    </div>
+                    <!-- <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button> -->
+                    <button type="submit" class="btn btn-primary">Upload</button>
+                    </center>
+            </div>
+            </form>
+
+
+
+        </div>
+        </div>
+    </div>
+
+
+
+{% endblock %}
+
+
+{% block extra_js %}
+
+
+<script>
+    $("#upload_photo-form").submit(function (e) {
+// preventing from page reload and default actions
+e.preventDefault();
+// serialize the data for sending the form data.
+var serializedData = $(this).serialize();
+// make POST ajax call
+$.ajax({
+    type: 'POST',
+    url: "{% url 'profile_pic_upload' %}",
+    data: serializedData,
+    success: function (response) {
+        // on successfull creating object
+        // alert("Successfully login")
+        // window.location = "{% url 'index' %}";
+        alert("Upload suces")
+        location.reload();
+        window.location = window.location.href;
+
+    },
+    error: function (response) {
+        // alert the error if any error occured
+        alert("error found")
+        location.reload();
+        window.location = window.location.href;
+    }
+})
+})
+</script>
+
+
+
+
+<script>
+    $(document).ready(function() {
+$('#example').DataTable( {
+dom: 'Bfrtip',
+buttons: [
+'copy', 'csv', 'excel', 'pdf', 'print'
+]
+} );
+} );
+</script>
+
+
+
+{% endblock %}

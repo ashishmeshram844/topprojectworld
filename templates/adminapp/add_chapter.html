@@ -1,0 +1,124 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New Chapter</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="block-body">
+                    
+                    {% if chapter_avail %}
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_chapter' chapter_avail.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Select Subject </label>
+                            <select required  name="sel_subject" class="form-control">
+                                <option value="{{chapter_avail.sel_subject.id}}" >{{chapter_avail.sel_subject.name}}</option>
+                                {% for i in sub %}
+                                    <option value="{{i.id}}">{{i.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Chapter Name</label>
+                            <input type="text" required name="name" value="{{chapter_avail.name}}" placeholder="chapter name" class="form-control">    
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Thumnail </label>
+                            <input type="file" name="thumnail" placeholder="thumnail" class="form-control">   
+                            <a href="/media/{{chapter_avail.thumnail}}" target="_blank">
+                                <img src="/media/{{chapter_avail.thumnail}}" width="100px" height="100px">
+                            </a> 
+                        </div>
+                        
+                       
+                        <div class="form-group">
+                            <label class="form-control-label">Description</label>
+                            <textarea required placeholder="Enter Description" val name="description" class="form-control">{{chapter_avail.description}}</textarea>
+                        </div>
+    
+                    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE CHAPTER" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+    
+
+                    {% else %}
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Select Subject </label>
+                        <select required  name="sel_subject" class="form-control">
+                            <option value="#" disabled>--select subject--</option>
+                            {% for i in sub %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-control-label">Chapter Name</label>
+                        <input type="text" required name="name" placeholder="chapter name" class="form-control">    
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Thumnail </label>
+                        <input type="file" name="thumnail" placeholder="thumnail" class="form-control">    
+                    </div>
+                    
+                   
+                    <div class="form-group">
+                        <label class="form-control-label">Description</label>
+                        <textarea required placeholder="Enter Description" name="description" class="form-control"></textarea>
+                    </div>
+
+                   
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="ADD CHAPTER" class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+
+                  {% endif %}
+               
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

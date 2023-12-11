@@ -1,0 +1,212 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Filtered Projects</title>
+<meta name="description" content="Here all searched Projects are found">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+
+{% block extra_css %}
+<style>
+
+
+
+  
+  .rainbow {
+    position: relative;
+    z-index: 0;
+    border-radius: 10px;
+    overflow: hidden;
+    padding: 2rem;
+    
+  }
+
+
+.cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 2rem;
+  margin: 4rem 5vw;
+  padding: 0;
+  list-style-type: none;
+}
+
+.card {
+  position: relative;
+  display: block;
+  height: 100%;  
+  border-radius: calc(var(--curve) * 1px);
+  overflow: hidden;
+  text-decoration: none;
+}
+
+.card__image {      
+  width: 100%;
+  height: auto;
+}
+
+.card__overlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1;      
+  border-radius: calc(var(--curve) * 1px);    
+  background-color: var(--surface-color);      
+  transform: translateY(100%);
+  transition: .2s ease-in-out;
+}
+
+.card:hover .card__overlay {
+  transform: translateY(0);
+}
+
+.card__header {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 2em;
+  padding: 2em;
+  border-radius: calc(var(--curve) * 1px) 0 0 0;    
+  background-color: var(--surface-color);
+  transform: translateY(-100%);
+  transition: .2s ease-in-out;
+}
+
+.card__arc {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  bottom: 100%;
+  right: 0;      
+  z-index: 1;
+}
+
+.card__arc path {
+  fill: var(--surface-color);
+  d: path("M 40 80 c 22 0 40 -22 40 -40 v 40 Z");
+}       
+
+.card:hover .card__header {
+  transform: translateY(0);
+}
+
+.card__thumb {
+  flex-shrink: 0;
+  width: 50px;
+  height: 50px;      
+  border-radius: 50%;      
+}
+
+.card__title {
+  font-size: 1em;
+  margin: 0 0 .3em;
+  color: #6A515E;
+}
+
+.card__tagline {
+  display: block;
+  margin: 1em 0;
+  font-family: "MockFlowFont";  
+  font-size: .8em; 
+  color: #D7BDCA;  
+}
+
+.card__status {
+  font-size: .8em;
+  color: #D7BDCA;
+}
+
+.card__description {
+  padding: 0 2em 2em;
+  margin: 0;
+  color: #D7BDCA;
+  font-family: "MockFlowFont";   
+  display: -webkit-box;
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp: 3;
+  overflow: hidden;
+}    
+</style>
+{% endblock %}
+{% block main_content %}
+
+
+<section>
+    <div class="container com-sp pad-bot-10">
+        <div class="row">
+            <div class="con-title">
+                <h2>Projects <span>List</span></h2>
+                {% comment %} <p>Fusce id sem at ligula laoreet hendrerit venenatis sed purus. Ut pellentesque maximus lacus, nec pharetra augue.</p> {% endcomment %}
+            </div>
+        </div>
+
+        {% if project %}
+        <div class="container">
+
+            <!-- ----------------------------------------------------------------------- -->
+
+            {% for i in project %}
+            <div class="card mb-3 rainbow">
+              <div class="row no-gutters">
+                <div class="col-md-4">
+                <a href="{% url 'projects_detail' i.id %}"> <img src="/media/{{i.thumnail}}" class="card-img" alt="..." width="100%" ></a> 
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body" style="padding: 20px;">
+                    <h5 class="card-title">{{i.name}}</h5>
+                    <p class="card-text">{{i.description|slice:":200"}}.</p>
+                    <p class="card-text"><small class="text-muted">{{i.created_date}}</small></p>
+                    <a href="{% url 'projects_detail' i.id %}" class="btn btn-warning" style="background-color: #e25f30;">View Detail</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {% endfor %}
+            <!-- ----------------------------------------------------------------------- -->
+
+        </div>
+
+        <br>
+        <center>
+     
+
+          <div class="pagination">
+            
+            <span class="step-links">
+                {% if project.has_previous %}
+                    <a class="btn btn-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-success" href="?page={{ project.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                   <button class="btn btn-warning"> Page {{ project.number }} of {{ project.paginator.num_pages }}.</button>
+                </span>
+        
+                {% if project.has_next %}
+                    <a class="btn btn-success" href="?page={{ project.next_page_number }}">next</a>
+                    <a class="btn btn-primary" href="?page={{ project.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        </center>
+
+
+        {% else %}
+
+        <br><br><br><br>
+        <h1 style="text-align: center;color: #e25f30;">PROJECTS NOT FOUND</h1>
+        <br><br><br><br>
+
+        {% endif %}
+
+    </div>
+</section>
+
+{% endblock %}
+
+
+

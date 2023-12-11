@@ -1,0 +1,96 @@
+{% extends 'studentapp/student_base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Stduent Profile </title>
+<meta name="description" content="User can see their Profile Data">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+{% block dashboard_content %}
+
+<div class="udb">
+
+    <div class="udb-sec udb-prof">
+        <h4><img src="images/icon/db1.png" alt="" /> My Profile</h4>
+       
+        <div class="sdb-tabl-com ">
+            <table class=" bordered">
+                <tbody>
+                    <tr>
+                        <td>Username</td>
+                        <td>:</td>
+                        <td>{{user.username}}</td>
+                    </tr>
+
+                    <tr>
+                        <td> Primary Email</td>
+                        <td>:</td>
+                        <td>{{user.email}}</td>
+                    </tr>
+
+                    <tr>
+                        <td> Secondary Email</td>
+                        <td>:</td>
+                        <td>{{user.student_account.optional_email|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td> Mobile Number</td>
+                        <td>:</td>
+                        <td>{{user.student_account.mobile|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td> Optional Mobile</td>
+                        <td>:</td>
+                        <td>{{user.student_account.optional_mobile|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Address</td>
+                        <td>:</td>
+                        <td>{{user.student_account.address|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Country</td>
+                        <td>:</td>
+                        <td>{{user.student_account.country|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>State</td>
+                        <td>:</td>
+                        <td>{{user.student_account.state|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>City</td>
+                        <td>:</td>
+                        <td>{{user.student_account.city|default:""}}</td>
+                    </tr>
+
+                    <tr>
+                        <td>Zipcode</td>
+                        <td>:</td>
+                        <td>{{user.student_account.zipcode|default:""}}</td>
+                    </tr>
+
+
+
+
+                   
+                </tbody>
+            </table>
+            <div class="sdb-bot-edit">
+                <center>
+                <a href="{% url 'edit_student_profile' %}" class="waves-effect waves-light btn-large sdb-btn sdb-btn-edit"><i class="fa fa-pencil"></i> Edit my profile</a>
+                </center>
+                
+            </div>
+        </div>
+    </div>
+</div>
+    
+
+{% endblock %}

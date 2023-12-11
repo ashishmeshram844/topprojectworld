@@ -1,0 +1,62 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+
+
+
+{% block page_title %}
+<title>About TOPPROJECTWORLD - Computer Science Projects</title>
+<meta name="description" content="We Provide Computer Science Projects for students as well as client and also provide Educational Tutorials and Practice Problems with properly explained Solution">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+
+{% block main_content %}
+
+     <!--SECTION START-->
+     <section>
+        <div class="container com-sp pad-bot-70">
+            <div class="row">
+                <div class="cor about-sp">
+                    <div class="ed-about-tit">
+                        <div class="con-title">
+                            <h2>About <span> Us</span></h2>
+                            <p>
+                                This Website main Goal is provide projects and e-learning tutorials available to the people in one website.
+                                You can find projects related to different field and you can reach out to the given contact details in case of any query.
+                                This Website contain the information which you are looking for kindly have a detailed look over the site. This in turn helps you to enhance your skill.
+                            </p>
+                        </div>
+                    </div>
+                    <div class="ed-about-sec1">
+                        <div class="ed-advan">
+                            <ul>
+
+                                {% for i in about%}
+                                <li>
+                                    <div class="ed-ad-img">
+                                        <img src="/media/{{i.logo}}" alt="logo" style="border-radius: 45%;">
+                                    </div>
+                                    <div class="ed-ad-dec">
+                                        <h4>{{i.heading}}</h4>
+                                        <p>{{i.description|slice:":200"}}.</p>
+                                        <!-- <a href="#">Read more</a> -->
+                                    </div>
+                                </li>
+                                {% endfor %}
+
+                                
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="ed-about-sec1">
+                        <div class="col-md-6"></div>
+                        <div class="col-md-6"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <!--SECTION END-->
+
+
+
+{% endblock %}

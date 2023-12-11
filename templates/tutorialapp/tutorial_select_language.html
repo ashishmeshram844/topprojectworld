@@ -1,0 +1,100 @@
+{% extends 'userapp/base_with_sidebar.html' %}
+{% load static %}
+
+
+{% block page_title %}
+<title>{{sub.name}} Tutorial  {% if topic_data %} - {{topic_data.name}} {% endif %}</title>
+<meta name="description" content="{{sub.description|slice:':150'}}">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+
+{% block sidebar %}
+<div id="mySidebar" class="sidebar">
+    <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">×</a>
+    {% for i in topic %}
+    <a href="{% url 'explore_topic' sub.id i.id %}">{{i.name}}</a>
+    {% endfor %}
+  
+    
+</div>
+{% endblock %}
+
+
+
+{% block content_in %}
+
+
+<div class="container">
+    <h2 style="text-align: center;color: #e25f30;"> {{sub.name}}</h2>
+    
+
+
+
+    {% if topic_tutorial %}
+    <h2>{{topic_data.name}}</h2><hr>
+    {% for i in topic_tutorial %}
+    
+    <h3>{{i.heading}}</h3>
+    <div style="margin-left:3%;margin-right: 6%;">
+        {% if i.description %}
+        <p>{{i.description}}</p>
+        {% endif %}
+
+        {% if i.extra_description1 %}
+        <p>{{i.extra_description1}}</p>
+        {% endif %}
+
+        {% if i.extra_description2 %}
+        <p>{{i.extra_description2}}</p>
+        {% endif %}
+        <br>
+        {% if i.image %}
+        <br>
+        <center>
+        <img src="/media/{{i.image}}" width="50%" height="50%">
+        </center>
+        {% endif %}
+        
+        {% if i.example_code %}
+        <pre>{{i.example_code}}</pre>
+        {% endif %}
+
+        {% if i.example_explained %}
+        <h4>Example Explain : </h4>
+        <p>{{i.example_explained}}</p>
+        {% endif %}
+
+        {% if i.note %}
+        <p style="background-color: rgb(223, 209, 148);border: 1px solid black;padding: 3px;font-weight: bold;" > Note : {{i.note}}</p>
+        {% endif %}
+
+    </div>
+    {% endfor %}
+
+    <div>
+        <center>
+            {% if previous_topic_id %}
+            <a href="{% url 'explore_topic' sub.id previous_topic_id %}" class="btn btn-success" style="margin-right:20px">Previous</a>
+            {% endif %}
+
+            {% if next_topic_id %}
+            <a href="{% url 'explore_topic' sub.id next_topic_id %}" class="btn btn-success" style="margin-right:20px">Next</a>
+            {% endif %}
+        </center>
+    </div>
+
+    {% else %}
+    <div >
+    <p style="text-align: center;">{{sub.description}}</p>
+    <br><br>
+    <hr>
+    <h1 style="text-align: center;color: #e25f30;">TOPICS</h1><hr>
+    {% for i in topic %}
+    <center>
+    <a href="{% url 'explore_topic' sub.id i.id %}">{{i.name}}</a><hr>
+    </center>
+    {% endfor %}
+    </div>
+    {% endif %}
+</div>
+{% endblock %}

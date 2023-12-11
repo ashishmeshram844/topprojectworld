@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="en">
+{% load static %}
+{% load social_share %}
+<head>
+    <!-- add icon link -->
+    <link rel = "icon" href = 
+    "{% static 'images/logo.jpg' %}" 
+            type = "image/x-icon">
+    {% block page_title %}
+    <title>TOPPROJECTWORLD - Computer Science Projects</title>
+    
+    <meta name="description" content="We Provide Computer Science Projects for students as well as client and also provide Educational Tutorials and Practice Problems with properly explained Solution">
+    <meta name="keyword" content="{{keyword.keyward}}">
+    {% endblock %}
+    <!-- META TAGS -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="author" content="Ashish Meshram">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- FAV ICON(BROWSER TAB ICON) -->
+    <link rel="shortcut icon" href="images/fav.ico" type="image/x-icon">
+    <!-- GOOGLE FONT -->
+    <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700%7CJosefin+Sans:600,700" rel="stylesheet">
+    <!-- FONTAWESOME ICONS -->
+    <link rel="stylesheet" href="{% static 'css/font-awesome.min.css' %}">
+    <!-- ALL CSS FILES -->
+    <link href="{% static 'css/materialize.css' %}" rel="stylesheet">
+    <link href="{% static 'css/bootstrap.css' %}" rel="stylesheet" />
+    <link href="{% static 'css/style.css' %}" rel="stylesheet" />
+    <!-- RESPONSIVE.CSS ONLY FOR MOBILE AND TABLET VIEWS -->
+    <link href="{% static 'css/style-mob.css' %}" rel="stylesheet" />
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+   
+	<script src="{% static 'js/html5shiv.js' %}"></script>
+	<script src="{% static 'js/respond.min.js' %}"></script>
+    {% block extra_css %}
+
+    {% endblock %}
+	
+</head>
+
+<body>
+
+    {% block topbar %}
+    <!-- MOBILE MENU -->
+    <section>
+        <div class="ed-mob-menu">
+            <div class="ed-mob-menu-con">
+                <div class="ed-mm-left">
+                    <div class="wed-logo">
+                        <a href="{% url 'index' %}"><img src="{% static 'images/logo.jpg' %}" alt="" height="55px" />
+						</a>
+                    </div>
+                </div>
+                <div class="ed-mm-right">
+                    <div class="ed-mm-menu">
+                        <a href="#!" class="ed-micon"><i class="fa fa-bars"></i></a>
+                        <div class="ed-mm-inn">
+                            <a href="#!" class="ed-mi-close"><i class="fa fa-times"></i></a>
+                            <!-- <h4>All Courses</h4>
+                            <ul>
+                                <li><a href="course-details.html">Accounting/Finance</a></li>
+                                <li><a href="course-details.html">civil engineering</a></li>
+                                
+                            </ul> -->
+                            <h4>User Account</h4>
+                            <ul>
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'logout' %}">Logout</a>
+                                </li>
+                                {% else %}
+                                <li><a href="#" data-toggle="modal" id="login_page" data-target="#modal1">Sign In</a></li>
+                                <li><a href="#" data-toggle="modal" data-target="#modal2">Register</a></li>
+                                {% endif %}
+                            </ul>
+                            <h4>All Pages</h4>
+                            <ul>
+                                <li><a href="{% url 'index' %}">Home</a></li>
+                                <li><a href="{% url 'about' %}">About us</a></li>
+                                
+                                <li><a href="{% url 'tutorial_languages' %}">Tutorials</a></li>
+                                <li><a href="{% url 'projects' %}">Projects</a></li>
+                                <li><a href="{% url 'practice_list' %}">Practice_problems</a></li>
+                                <li><a href="{% url 'projects' %}">Projects</a></li>
+                                <li><a href="{% url 'blogs' %}">Blogs</a></li>
+                                <li><a href="{% url 'contact_us' %}">Contact Us</a></li>
+                            </ul>
+
+                            {% if user.is_authenticated %}
+                            <h4>User Profile</h4>
+                            <ul>
+                                <li><a href="{% url 'student_dashboard' %}">User Dashboard</a></li>
+                                <li><a href="db-courses.html">Courses</a></li>
+                                <!-- <li><a href="db-exams.html">Exams</a></li>
+                                <li><a href="db-profile.html">Prfile</a></li> -->
+                                
+                            </ul>
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--HEADER SECTION-->
+    <section>
+        <!-- TOP BAR -->
+        <div class="ed-top" style="background-color: #000000;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="ed-com-t1-left">
+                            <ul>
+                                <li><a href="#">Email: topprojectworld@gmail.com</a>
+                                </li>
+                                <li><a href="#">Phone: +91 - 1234567899</a>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="ed-com-t1-right">
+                            <ul>
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'logout' %}">Logout</a>
+                                </li>
+                                {% else %}
+                                <li><a href="#!" data-toggle="modal" data-target="#modal1">Sign In</a>
+                                </li>
+                                <li><a href="#!" data-toggle="modal" data-target="#modal2">Sign Up</a>
+                                </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        <div class="ed-com-t1-social">
+                            <ul>
+                                <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                                </li>
+                                <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- LOGO AND MENU SECTION -->
+        <div class="top-logo" data-spy="affix" data-offset-top="250">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="wed-logo">
+                            <a href="{% url 'index' %}"><img src="{% static 'images/logo.jpg' %}" alt=""   height="55px" />
+                            </a>
+                        </div>
+                        <div class="main-menu">
+                            <ul>
+                                <li><a href="{% url 'index' %}">Home</a>
+                                </li>
+
+                                <li><a href="{% url 'about' %}">About</a>
+                                </li>
+                               
+                                
+                                <li><a href="{% url 'blogs' %}">Blogs</a>
+                                </li>
+
+
+                               
+                                <li class="admi-menu">
+                                    <a href="{% url 'projects' %}" class="mm-arr">Projects</a>
+                                    <!-- MEGA MENU 1 -->
+                                    <div class="mm-pos">
+                                        <div class="admi-mm m-menu">
+                                            <div class="m-menu-inn">
+
+                                                {% for i in project_catagory %}
+                                                <div class="mm2-com mm1-com mm1-s1">
+                                                    <div class="ed-course-in">
+                                                        <a class="course-overlay" href="{% url 'projects_filter' i.id %}">
+                                                            <img src="/media/{{i.thumnail}}" alt="">
+                                                            <span>{{i.name}}</span>
+                                                        </a>
+                                                    </div>
+                                                    <p>{{i.description|slice:":100"}}</p>
+                                                    <a href="#" class="mm-r-m-btn">Read more</a>
+                                                </div>
+                                                {% endfor %}
+
+                                                
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+
+                                
+
+                                <li class="about-menu">
+                                    <a href="{% url 'practice_list' %}" class="mm-arr">Practice Problems</a>
+                                    <!-- MEGA MENU 1 -->
+                                    <div class="mm-pos">
+                                        <div class="about-mm m-menu">
+                                            <div class="m-menu-inn">
+                                                <div class="mm1-com mm1-s1">
+                                                    <div class="ed-course-in">
+                                                        <a class="course-overlay menu-about" href="#">
+                                                            <img src="{% static 'images/h-about.jpg' %}" alt="">
+                                                            <span>Practice Problems</span>
+                                                        </a>
+                                                    </div>
+                                                </div>
+                                                <div class="mm1-com mm1-s2">
+                                                    <p>Want to change the world? At Berkeley we’re doing just that. When you join the Golden Bear community, you’re part of an institution that shifts the global conversation every single day.</p>
+                                                    <a href="#" class="mm-r-m-btn">Read more</a>
+                                                </div>
+
+
+                                                {% for i in subject_catagory %}
+                                                <div class="mm1-com mm1-s3">
+                                                    <ul>
+                                                        <h4>{{i.name}}</h4>
+
+                                                        {% for j in subject %}
+                                                        {% if i.id == j.sel_subject_catagory.id %}
+                                                        <li><a href="{% url 'practice_problems' j.id %}">{{j.name}}</a></li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                {% endfor %}
+
+                                               
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+
+                                <li class="cour-menu">
+                                    <a href="{% url 'tutorial_languages' %}" class="mm-arr">Tutorials</a>
+                                    <!-- MEGA MENU 1 -->
+                                    <div class="mm-pos">
+                                        <div class="cour-mm m-menu">
+                                            <div class="m-menu-inn">
+
+                                                {% for i in subject %}
+                                                <div class="mm1-com mm1-cour-com mm1-s3">
+													<h4><a href="{% url 'tutorial_select_language' i.id %}" > {{i.name}}</a></h4>
+                                                    <ul>
+                                                        {% for j in chapter %}
+                                                        {% if i.id == j.sel_subject.id %}
+														<li><a href="{% url 'tutorial_select_language' i.id %}">{{j.name}}</a></li>
+                                                        {% endif %}
+                                                        {% endfor %}
+                                                    </ul>
+                                                </div>
+                                                {% endfor %}
+            
+                                                
+
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li><a href="{% url 'contact_us' %}">Contact us</a>
+                                </li>
+                                <!-- <li><a href="events.html">Events</a>
+                                </li> -->
+                                {% if user.is_authenticated %}
+                                <li><a href="{% url 'student_dashboard' %}">Student</a>
+                                </li>
+                                {% endif %}
+
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="all-drop-down-menu">
+
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        {% block search %}
+        <div class="search-top" style="background-color: #000000;">
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="search-form">
+                            <form method="GET" action="{% url 'search_projects' %}"> 
+                                <div class="sf-type">
+                                    <div class="sf-input">
+                                        <input type="text"  style="border-radius: 30px;" id="sf-box" name="query" placeholder="Search Project Here">
+                                    </div>
+                                </div>
+                                <div class="sf-submit">
+                                    <input  style="border-radius:  0px 30px;" type="submit" value="Search">
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        {% endblock %}
+
+    </section>
+    <!--END HEADER SECTION-->
+    {% endblock %}
+    
+
+    {% block main_content %}
+
+    <h1>THIS IS CONTENT </h1>
+    <h1>THIS IS CONTENT </h1>
+    <h1>THIS IS CONTENT </h1>
+    <h1>THIS IS CONTENT </h1>
+
+    
+
+    {% endblock %}
+
+
+    {% block footer %}
+    <!-- FOOTER -->
+    <section class="wed-hom-footer"  style="background-color: #000000;">
+        <div class="container">
+            <!--<div class="row">
+				<div class="col-md-12">
+				<h4>About Wedding Planner</h4>
+				<p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. If you are going to use a passage of Lorem Ipsum</p>
+				<p>more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text</p>
+				<p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old.</p>
+				<p></p>
+			  </div>
+			  </div>-->
+            <div class="row wed-foot-link">
+                <div class="col-md-4 foot-tc-mar-t-o">
+                    <h4>Top Tutorials</h4>
+                    <ul>
+                        {% for i in subject %}
+                        <li><a href="{% url 'tutorial_select_language' i.id %}">{{i.name}}</a></li>
+                        
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>Projects Catagory</h4>
+                    <ul>
+                        {% for i in project_catagory %}
+                        <li><a href="{% url 'projects_filter' i.id %}">{{i.name}}</a></li>
+                       
+                        {% endfor %}
+                    </ul>
+                </div>
+                <div class="col-md-4">
+                    <h4>HELP & SUPPORT</h4>
+                    <ul>
+                        <li><a href="#">24x7 Live help</a>
+                        </li>
+                        <li><a href="{% url 'contact_us' %}">Contact us</a>
+                        </li>
+                        <li><a href="#">Feedback</a>
+                        </li>
+                        <li><a href="#">FAQs</a>
+                        </li>
+                        <li><a href="#">Safety Tips</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            <div class="row wed-foot-link-1">
+                <div class="col-md-4 foot-tc-mar-t-o">
+                    <h4>Get In Touch</h4>
+                    <p>Address: Gautam Nagar Tekdi wadi Khadgaon road Nagpur, Maharashtra, India..</p>
+                    <p>Phone: <a href="#!">+91 7057559583</a></p>
+                    <p>Email: <a href="#!">topprojectworld@gmail.com</a></p>
+                </div>
+                <!-- <div class="col-md-4">
+                    <h4>DOWNLOAD OUR FREE MOBILE APPS</h4>
+                    <ul>
+                        <li><a href="#"><span class="sprite sprite-android"></span></a>
+                        </li>
+                        <li><a href="#"><span class="sprite sprite-ios"></span></a>
+                        </li>
+                    </ul>
+                </div> -->
+                <div class="col-md-4">
+                    <h4>SOCIAL MEDIA</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-google-plus" aria-hidden="true"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-whatsapp" aria-hidden="true"></i></a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+
+   
+
+    {% endblock %}
+
+
+
+    <!--SECTION LOGIN, REGISTER AND FORGOT PASSWORD-->
+    <section>
+        <!-- LOGIN SECTION -->
+        <div id="modal1" class="modal fade" role="dialog">
+            <div class="log-in-pop">
+                <div class="log-in-pop-left" style="background-color: black;">
+                    <h1>Hello...</h1>
+                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                    <h4>Login with social media</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-google"></i> Google+</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="log-in-pop-right">
+                    <a href="#" class="pop-close" data-dismiss="modal"><img src="{% static 'images/cancel.png' %}" alt="" />
+                    </a>
+                    <h4 style="color: red;" name="login_error_text"  id="login_error_text"></h4>
+                    <h4>Login</h4>
+                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                    <form class="s12" id="login-form">
+                        {% csrf_token %}
+                        <div>
+                            <div class="input-field s12">
+                                <input type="text" name="username" id="username" data-ng-model="name" class="validate">
+                                <label>User name</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12">
+                                <input type="password" name="password" id="password" class="validate">
+                                <label>Password</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="s12 log-ch-bx">
+                                <p>
+                                    <input type="checkbox" id="test5" />
+                                    <label for="test5">Remember me</label>
+                                </p>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s4">
+                                <input type="submit" value="Login" class="waves-effect waves-light log-in-btn"> </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal3">Forgot password</a> | <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Create a new account</a> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- REGISTER SECTION -->
+        <div id="modal2" class="modal fade" role="dialog">
+            <div class="log-in-pop">
+                <div class="log-in-pop-left" style="background-color: black;">
+                    <h1>Hello...</h1>
+                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                    <h4>Login with social media</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-google"></i> Google+</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="log-in-pop-right">
+                    <a href="#" class="pop-close" data-dismiss="modal"><img src="{% static 'images/cancel.png' %}" alt="" />
+                    </a>
+
+                    <h4 style="color: red;" name="error_text"  id="error_text"></h4>
+
+                   
+                    <h4>Create an Account</h4>
+                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                    <form class="s12" id="register-form">
+                        {% csrf_token %}
+                        <div>
+                            <div class="input-field s12">
+                                <input type="text" id="name" name="username" data-ng-model="name1" class="validate">
+                                <label>User name</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12">
+                                <input id="email" type="email" name="email"  class="validate">
+                                <label>Email id</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12">
+                                <input type="password" name="pass1" id="pass1" class="validate">
+                                <label>Password</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12">
+                                <input type="password" name="pass2" id="pass2" class="validate">
+                                <label>Confirm password</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s4">
+                                <input type="submit" value="Register" class="waves-effect waves-light log-in-btn"> </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1">Are you a already member ? Login</a> </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <!-- FORGOT SECTION -->
+        <div id="modal3" class="modal fade" role="dialog">
+            <div class="log-in-pop">
+                <div class="log-in-pop-left" style="background-color: black;">
+                    <h1>Hello... </h1>
+                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
+                    <h4>Login with social media</h4>
+                    <ul>
+                        <li><a href="#"><i class="fa fa-facebook"></i> Facebook</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-google"></i> Google+</a>
+                        </li>
+                        <li><a href="#"><i class="fa fa-twitter"></i> Twitter</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="log-in-pop-right">
+                    <a href="#" class="pop-close" data-dismiss="modal"><img src="{% static 'images/cancel.png' %}" alt="" />
+                    </a>
+                    <h4 style="color: green;" name="opt_send_message"  id="opt_send_message"></h4>
+                    <h4 style="color: red;" name="error_text"  id="forget_error_text"></h4>
+                    <h4>Forgot password</h4>
+                    <p>Don't have an account? Create your account. It's take less then a minutes</p>
+
+                    <!-- FORGET PASS FORM -->
+                    <form class="s12" id="forget_pass-form">
+                        {% csrf_token %}
+                        <div id="forget_email_div">
+                            <div class="input-field s12">
+                                <input type="email" data-ng-model="name3" name="forget_pass_email" id="forget_pass_email" class="validate">
+                                <label>Enter Registered Email</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s4">
+                                <input type="submit" value="Submit" class="waves-effect waves-light log-in-btn"> </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1">Are you a already member ? Login</a> | <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Create a new account</a> </div>
+                        </div>
+                    </form>
+
+                    <!-- OTP CONFIRM FORM -->
+
+                    <form class="s12" id="otp_confirm-form" style="display: none;">
+                        {% csrf_token %}
+                        <div id="forget_email_div">
+                            <div class="input-field s12">
+                                <input type="text" data-ng-model="name3" required name="otp" id="otp" class="validate">
+                                <label>Enter OTP</label>
+                            </div>
+                        </div>
+                        <div>
+                            <div class="input-field s4">
+                                <input type="submit" value="Submit" class="waves-effect waves-light log-in-btn"> </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1">Are you a already member ? Login</a> | <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Create a new account</a> </div>
+                        </div>
+                    </form>
+
+                    <!-- here -->
+
+
+                    <!-- OTP CONFIRM CHANGE FORM -->
+
+                    <form class="s12" id="change_password-form" style="display: none;">
+                        {% csrf_token %}
+
+                        <div id="forget_email_div">
+                            <div class="input-field s12">
+                                <input type="text" data-ng-model="name3" hidden required name="change_pass_username" id="change_pass_username" class="validate">
+                                <label></label>
+                            </div>
+                        </div>
+
+                        <div id="forget_email_div">
+                            <div class="input-field s12">
+                                <input type="password" data-ng-model="name3"  required name="password" id="password" class="validate">
+                                <label>Enter New Password</label>
+                            </div>
+                        </div>
+
+                        <div id="forget_email_div">
+                            <div class="input-field s12">
+                                <input type="password" data-ng-model="name3" required name="confirm_password" id="confirm_password" class="validate">
+                                <label>Confirm New Password</label>
+                            </div>
+                        </div>
+
+
+                        <div>
+                            <div class="input-field s4">
+                                <input type="submit" value="Submit" class="waves-effect waves-light log-in-btn"> </div>
+                        </div>
+                        <div>
+                            <div class="input-field s12"> <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal1">Are you a already member ? Login</a> | <a href="#" data-dismiss="modal" data-toggle="modal" data-target="#modal2">Create a new account</a> </div>
+                        </div>
+                    </form>
+
+                    <!-- here -->
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    
+
+    <!--Import jQuery before materialize.js-->
+    <script src="{% static 'js/main.min.js' %}"></script>
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+    <script src="{% static 'js/materialize.min.js' %}"></script>
+    <script src="{% static 'js/custom.js' %}"></script>
+
+
+        {% include 'userapp/ajax.html' %}
+<!-- LOGIN POPUP IF NOT LOGGED IN -->
+
+
+
+
+
+
+
+        <!-- <script>
+            $("#register-form").submit(function (e) {
+        // preventing from page reload and default actions
+        e.preventDefault();
+        // serialize the data for sending the form data.
+        var serializedData = $(this).serialize();
+        // make POST ajax call
+        $.ajax({
+            type: 'POST',
+            url: "{% url 'register' %}",
+            data: serializedData,
+            success: function (response) {
+                // on successfull creating object
+                // alert("Successfully login")
+                // window.location = "{% url 'index' %}";
+                location.reload();
+                window.location = window.location.href;
+
+            },
+            error: function (response) {
+                // alert the error if any error occured
+                element = document.querySelector('.error_text');
+                document.getElementById('error_text').innerHTML = response["responseJSON"]["error"];
+                // element.style.visibility = 'visible';
+                // alert(response["responseJSON"]["error"]);
+            }
+        })
+    })
+        </script>
+
+
+
+<script>
+    $("#login-form").submit(function (e) {
+// preventing from page reload and default actions
+e.preventDefault();
+// serialize the data for sending the form data.
+var serializedData = $(this).serialize();
+// make POST ajax call
+$.ajax({
+    type: 'POST',
+    url: "{% url 'login' %}",
+    data: serializedData,
+    success: function (response) {
+        // on successfull creating object
+        // alert("Successfully login")
+        // window.location = "{% url 'index' %}";
+        location.reload();
+        window.location = window.location.href;
+
+    },
+    error: function (response) {
+        // alert the error if any error occured
+        element = document.querySelector('.login_error_text');
+        document.getElementById('login_error_text').innerHTML = response["responseJSON"]["error"];
+        // element.style.visibility = 'visible';
+        // alert(response["responseJSON"]["error"]);
+    }
+})
+})
+</script>
+
+
+
+
+
+<script>
+    $("#forget_pass-form").submit(function (e) {
+// preventing from page reload and default actions
+e.preventDefault();
+// serialize the data for sending the form data.
+var serializedData = $(this).serialize();
+// make POST ajax call
+$.ajax({
+    type: 'POST',
+    url: "{% url 'forget_password' %}",
+    data: serializedData,
+    success: function (response) {
+        // on successfull creating object
+        // element = document.querySelector('.opt_send_message');
+        // document.getElementById('opt_send_message').innerHTML = response["responseJSON"]["instance"];
+
+        
+        $('#opt_send_message').text("OTP sent to Your Mail ID");
+        $('#forget_pass-form').hide();
+        $('#forget_error_text').hide();
+        $('#otp_confirm-form').show();
+        
+        // alert("Otp sent to your mail id ")
+        // window.location = "{% url 'index' %}";
+        // window.location = window.location.href;
+
+    },
+    error: function (response) {
+        // alert the error if any error occured
+        element = document.querySelector('.forget_error_text');
+        document.getElementById('forget_error_text').innerHTML = response["responseJSON"]["error"];
+        // element.style.visibility = 'visible';
+        // alert(response["responseJSON"]["error"]);
+    }
+})
+})
+</script>
+
+
+
+
+
+
+
+<script>
+    $("#otp_confirm-form").submit(function (e) {
+// preventing from page reload and default actions
+e.preventDefault();
+// serialize the data for sending the form data.
+var serializedData = $(this).serialize();
+// make POST ajax call
+$.ajax({
+    type: 'POST',
+    url: "{% url 'opt_confirmation' %}",
+    data: serializedData,
+    success: function (response) {
+        // on successfull creating object
+        
+        $('#opt_send_message').text("OTP Verified Sucessfully");
+        $('#forget_pass-form').hide();
+        $('#forget_error_text').hide();
+        $('#otp_confirm-form').hide();
+        $('#change_password-form').show();
+
+        $("#change_pass_username").val(response["msg"]);
+        console.log(response["msg"])
+        // alert(response["msg"])
+        
+        // alert("Otp sent to your mail id ")
+        // window.location = "{% url 'index' %}";
+        // window.location = window.location.href;
+
+    },
+    error: function (response) {
+        // alert the error if any error occured
+        // element = document.querySelector('.forget_error_text');
+        // document.getElementById('forget_error_text').innerHTML = response["responseJSON"]["error"];
+        // element.style.visibility = 'visible';
+        $('#opt_send_message').hide();
+        $('#forget_error_text').show();
+        $('#forget_error_text').text("OTP is Invalid");
+        // alert(response["responseJSON"]["error"]);
+    }
+})
+})
+</script>
+
+
+
+
+
+
+
+<script>
+    $("#change_password-form").submit(function (e) {
+// preventing from page reload and default actions
+e.preventDefault();
+// serialize the data for sending the form data.
+var serializedData = $(this).serialize();
+// make POST ajax call
+$.ajax({
+    type: 'POST',
+    url: "{% url 'change_password' %}",
+    data: serializedData,
+    success: function (response) {
+        // on successfull creating object
+        // element = document.querySelector('.opt_send_message');
+        // document.getElementById('opt_send_message').innerHTML = response["responseJSON"]["instance"];
+
+        $('#opt_send_message').show();
+        $('#opt_send_message').text("password Changed Successfully Login Now ")
+
+        $('#forget_pass-form').hide();
+        $('#forget_error_text').hide();
+        $('#otp_confirm-form').hide();
+        $('#change_password-form').hide();
+        
+        // alert("Otp sent to your mail id ")
+        // window.location = "{% url 'index' %}";
+        // window.location = window.location.href;
+
+    },
+    error: function (response) {
+        // alert the error if any error occured
+        // element = document.querySelector('.forget_error_text');
+        // document.getElementById('forget_error_text').innerHTML = response["responseJSON"]["error"];
+        // element.style.visibility = 'visible';
+        $('#opt_send_message').hide();
+        $('#forget_error_text').show();
+        $('#forget_error_text').text("Password are not same");
+        // alert(response["responseJSON"]["error"]);
+    }
+})
+})
+</script> -->
+
+
+
+    {% block extra_js %}
+
+
+    {% endblock %}
+</body>
+
+</html>

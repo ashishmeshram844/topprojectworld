@@ -1,0 +1,132 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New Program</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="block-body">
+                    
+                    {% if practice_program %}
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_program' practice_program.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                            <label required class="form-control-label">Select Subject </label>
+                            <select  name="sel_subject" class="form-control">
+                                <option value="{{practice_program.sel_subject.id}}" disabled>{{practice_program.sel_subject.name}}</option>
+                                {% for i in sub %}
+                                    <option value="{{i.id}}">{{i.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Heading</label>
+                            <input type="text" required name="heading" value="{{practice_program.heading}}" placeholder="Program name" class="form-control">    
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Image </label>
+                            <input type="file" name="image" placeholder="image" class="form-control">  
+                            <a href="/media/{{practice_program.image}}" target="_blank">
+                                <img src="/media/{{practice_program.image}}" width="100px" height="100px">
+                            </a>  
+                        </div>
+                        
+                       
+                        <div class="form-group">
+                            <label class="form-control-label">Program</label>
+                            <textarea required placeholder="Enter Program" name="program" class="form-control">{{practice_program.program}}</textarea>
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Note</label>
+                            <input type="text" value="{{practice_program.note}}" name="note" placeholder="Program note" class="form-control">    
+                        </div>
+                    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE PROGRAM" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+    
+
+                    {% else %}
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Select Subject </label>
+                        <select required  name="sel_subject" class="form-control">
+                            <option value="#" disabled>--select subject--</option>
+                            {% for i in sub %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-control-label">Heading</label>
+                        <input type="text" required name="heading" placeholder="Program name" class="form-control">    
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Image </label>
+                        <input type="file" name="image" placeholder="image" class="form-control">    
+                    </div>
+                    
+                   
+                    <div class="form-group">
+                        <label class="form-control-label">Program</label>
+                        <textarea required placeholder="Enter Program" name="program" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Note</label>
+                        <input type="text" name="note" placeholder="Program note" class="form-control">    
+                    </div>
+                
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="ADD PROGRAM" class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+
+                  {% endif %}
+               
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

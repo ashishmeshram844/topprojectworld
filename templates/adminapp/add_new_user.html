@@ -1,0 +1,137 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New User</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="block-body">
+
+
+                  {% if stu %}
+
+                  <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Username</label>
+                        <input type="text" value="{{stu.sel_user.username}}" placeholder="Username" name="username"  class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Email</label>
+                      <input type="text" placeholder="email" value="{{stu.sel_user.email}}" name="email" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Full Name</label>
+                      <input type="text" placeholder="Full Name" name="fullname" value="{{stu.fullname}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">optional Email</label>
+                      <input type="text" placeholder="optional Email" value="{{stu.optional_email}}" name="optional_email" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Mobile</label>
+                      <input type="text" placeholder="Mobile" name="mobile" value="{{stu.mobile}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Optional Mobile</label>
+                      <input type="text" placeholder="Optional Mobile Nujmber" value="{{stu.optional_mobile}}" name="optional_mobile" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Address</label>
+                      <input type="text" placeholder="Address" name="address" value="{{stu.address}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Country</label>
+                      <input type="text" placeholder="Country" name="country" value="{{stu.country}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">State</label>
+                      <input type="text" placeholder="State" name="state" value="{{stu.state}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">City</label>
+                      <input type="text" placeholder="City" name="city" value="{{stu.city}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Zipcode</label>
+                      <input type="text" placeholder="zipcode" name="zipcode" value="{{stu.zipcode}}" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Photo</label>
+                      <img src="/media/{{stu.photo}}" width="200px" height="200px">
+                    </div>
+
+
+
+
+
+                  </form>
+
+                  {% else %}
+                  <form method="POST">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Username</label>
+                        <input type="text" placeholder="Username" required name="username" class="form-control">
+                    </div>
+
+                   
+                    <div class="form-group">
+                      <label class="form-control-label">Email</label>
+                      <input type="email" placeholder="Email Address" required name="email" class="form-control">
+                    </div>
+
+                    <div class="form-group">       
+                      <label class="form-control-label">Password</label>
+                      <input type="password" placeholder="Password" required name="password" class="form-control">
+                    </div>
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="CREATE USER" class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

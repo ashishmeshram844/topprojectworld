@@ -1,0 +1,78 @@
+{% extends 'adminapp/admin_base.html' %}
+
+
+
+
+{% block content %}
+<div class="page-header no-margin-bottom">
+    <div class="container-fluid">
+      <h2 class="h5 no-margin-bottom">Technology List</h2>
+    </div>
+</div>
+
+ <!-- Breadcrumb-->
+ <div class="container-fluid">
+    <ul class="breadcrumb">
+      {% for i in messages %}
+      <h4 style="color: green;">{{i}}</h4>
+      {% endfor %}
+    </ul>
+  </div>
+
+  <section class="no-padding-top">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Basic Form-->
+        <div class="col-lg-12">
+          <div class="block">
+
+            <table id="example" class="table table-responsive" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        
+                        <th>Description</th>
+                        <th>Date</th>
+                        
+                        <th>View</th> 
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+
+                  {% for i in technology %}
+                    <tr>
+                        <td>{{i.id}}</td>
+                       
+                        <td>{{i.name}}</td>
+                        <td>{{i.description}}</td>
+                        <td>{{i.created_date}}</td>
+                        
+                        <td>
+                          <a href="{% url 'view_technology' i.id %}" class="btn btn-warning">View</a>
+                        </td>
+                        <td>
+                          <a href="{% url 'delete_technology' i.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+                       
+                      
+                       
+                    </tr>
+                    {% endfor %}
+
+                    </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+{% endblock %}
+
+
+                
+
+</html>

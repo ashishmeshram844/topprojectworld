@@ -1,0 +1,201 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New Tutorial Detail</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="block-body">
+                    
+                    {% if tutorial_detail %}
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_tutorial_detail' tutorial_detail.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                          <label class="form-control-label">Select Subject </label>
+                          <select  id="sel_subject"  name="sel_subject" class="form-control">
+                              <option value="{{tutorial_detail.sel_subject.id}}" selected >{{tutorial_detail.sel_subject.name}}</option>
+                              {% for i in sub %}
+                                  <option value="{{i.id}}">{{i.name}}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+  
+                      <div class="form-group">
+                          <label class="form-control-label">Select Topic </label>
+                          <select id="sel_topic" name="sel_topic" class="form-control">
+                              <option selected  value="{{tutorial_detail.sel_topic.id}}">{{tutorial_detail.sel_topic.name}}</option>
+                              {% for i in topic %}
+                                <option value="{{i.id}}" data-subjectid="{{i.sel_subject.id}}" >{{i.name}}</option>
+                              {% endfor %}
+                          </select>
+                      </div>
+  
+  
+                      <div class="form-group">
+                          <label class="form-control-label">Heading </label>
+                          <input required type="text" name="heading" value="{{tutorial_detail.heading}}" placeholder="Enter Heading" class="form-control">    
+                      </div>
+  
+                     
+                      <div class="form-group">
+                          <label class="form-control-label">Description</label>
+                          <textarea required placeholder="Enter Description" name="description" class="form-control">{{tutorial_detail.description}}</textarea>
+                      </div>
+  
+                      <div class="form-group">
+                        <label class="form-control-label">Extra Description1</label>
+                        <textarea placeholder="Enter Description 1 " name="extra_description1" class="form-control">{{tutorial_detail.extra_description1}}</textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-control-label">Extra Description 2 </label>
+                        <textarea placeholder="Enter Description 2" name="extra_description2" class="form-control">{{tutorial_detail.extra_description2}}</textarea>
+                      </div>
+
+                      <div class="form-group">
+                        <label class="form-control-label">Note </label>
+                        <input type="text" name="note" value="{{tutorial_detail.note}}" placeholder="Enter Heading" class="form-control">    
+                    </div>
+
+
+                    <div class="form-group">
+                      <label class="form-control-label">Example Code </label>
+                      <textarea placeholder="Enter Example code" name="example_code" class="form-control">{{tutorial_detail.example_code}}</textarea>
+                    </div>
+
+                    <div class="form-group">
+                      <label class="form-control-label">Example Explained </label>
+                      <textarea placeholder="Enter Example Explaination" name="example_explained" class="form-control">{{tutorial_detail.example_explained}}</textarea>
+                    </div>
+                    
+                      
+
+                      <div class="form-group">
+                        <label class="form-control-label">Image </label>
+                        <input type="file" name="image" va placeholder="image" class="form-control">  
+                        <a href="/media/{{tutorial_detail.image}}">
+                          <img src="/media/{{tutorial_detail.image}}" width="100px" height="100px">
+                        </a>  
+                     </div>
+                    
+
+
+
+                    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE TUTORIAL DETAIL" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+    
+
+                    {% else %}
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Select Subject </label>
+                        <select id="sel_subject"  name="sel_subject" class="form-control">
+                            <option value="#" selected disabled>--select Subject--</option>
+                            {% for i in sub %}
+                                <option value="{{i.id}}">{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Select Topic </label>
+                        <select id="sel_topic" name="sel_topic" class="form-control">
+                            <option selected disabled>Choose a topic</option>
+                            {% for i in topic %}
+                              <option value="{{i.id}}" data-subjectid="{{i.sel_subject.id}}" >{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+
+                    <div class="form-group">
+                        <label class="form-control-label">Heading </label>
+                        <input type="text" name="heading" placeholder="Enter Heading" class="form-control">    
+                    </div>
+
+                   
+                   
+                    <div class="form-group">
+                        <label class="form-control-label">Description</label>
+                        <textarea placeholder="Enter Description" name="description" class="form-control"></textarea>
+                    </div>
+
+                   
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="ADD TUTORIAL DETAIL" class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+
+                  {% endif %}
+               
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}
+
+
+
+
+
+{% block extra_js %}
+
+      
+<!-- <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script> -->
+
+<!-- DEPENDER SUBJECT AND TOPIC DROPDOWN -->
+<script>
+
+    $(document).ready(function()
+    {
+        var $select1 = $('#sel_subject'),
+            $select2 = $('#sel_topic'),
+            $options = $select2.find('option');
+            $select1.on('change',function()
+            {
+                $select2.html($options.filter('[data-subjectid="'+this.value+'"]'));
+            }).trigger('change');
+    });
+
+</script>
+
+
+{% endblock %}
+
+

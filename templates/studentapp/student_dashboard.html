@@ -1,0 +1,58 @@
+{% extends 'studentapp/student_base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Student Dashboard</title>
+<meta name="description" content="This is Student Dashboard, Here students all data is visible">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+{% block dashboard_content %}
+
+
+<div class="udb">
+    {% for i in messages %}
+        <p class="alert alert-danger">{{i}}</p>
+    {% endfor %}
+  
+    <div class="udb-sec udb-cour-stat">
+        <h4><img src="images/icon/db3.png" alt="" /> Bookmarks Status</h4>
+        <p>Your addedd bookmarks list</p>
+        <div class="pro-con-table">
+            <table id="example" class="table table-responsive" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>name</th>
+                        <th>Link</th>
+                        
+                        <th>Addedd Date</th>
+                      
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody>
+    
+                  {% for i in book %}
+                    <tr>
+                        <td>{{i.name}}</td>
+                       
+                        <td> 
+                            <a href="{{i.link}}" target="_blank">{{i.link}}</a>
+                          </td>
+                        <td>{{i.created_date}} </td>
+                       
+                        <td>
+                          <a href="{% url 'delete_bookmark' i.id %}" class="btn btn-danger">Delete</a>
+                        </td>
+    
+                    </tr>
+                    {% endfor %}
+    
+                    </tbody>
+                    </table>
+        </div>
+    </div>
+    
+</div>
+
+
+{% endblock %}

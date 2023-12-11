@@ -1,0 +1,89 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Computer Science Projects</title>
+<meta name="description" content="We Provide Computer Science Projects for students as well as client and also provide Educational Tutorials and Practice Problems with properly explained Solution">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+
+
+{% block extra_css %}
+<style>
+.carousel-inner > .item > img, .carousel-inner > .item > a > img {
+    object-fit: cover;
+    height: 580px;
+}
+</style>
+
+{% endblock %}
+{% block main_content %}
+    <!-- SLIDER -->
+    <section>
+        <div id="myCarousel" class="carousel slide" data-ride="carousel">
+            <!-- Wrapper for slides -->
+            <div class="carousel-inner">
+                
+                <div class="item slider1 active">
+                    <img src="{% static 'images/slider/1.jpg' %}" alt="">
+                    <div class="carousel-caption slider-con">
+                        <h2>Welcome to <span>TOPPTOJECTWORLD</span></h2>
+                        <p>We Provide Free as well as Paid Projects for College Students and also tutorials and pracice problems.</p>
+                        <a href="{% url 'projects' %}" class="bann-btn-1">All PROJECTS</a><a href="{% url 'blogs' %}" class="bann-btn-2">BLOGS</a>
+                    </div>
+                </div>
+                {% for i in slider%}
+                <div class="item ">
+                    <img src="/media/{{i.image}}" alt="">
+                    <div class="carousel-caption slider-con">
+                        <h2 style="color: {{i.heading_color}};"> {{i.heading_text}}</span></h2>
+                        <p style="color: {{i.description_color}};">{{i.description}}</p>
+                        <!-- <a href="#" class="bann-btn-1">Admission</a><a href="#" class="bann-btn-2">Read More</a> -->
+                    </div>
+                </div>
+                {% endfor %}
+            </div>
+
+            <!-- Left and right controls -->
+            <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+                <i class="fa fa-chevron-left slider-arr"></i>
+            </a>
+            <a class="right carousel-control" href="#myCarousel" data-slide="next">
+                <i class="fa fa-chevron-right slider-arr"></i>
+            </a>
+        </div>
+    </section>
+
+
+    <!-- DISCOVER MORE -->
+    <section>
+        <div class="container com-sp pad-bot-10">
+            <div class="row">
+                <div class="con-title">
+                    <h2>Discover <span>More</span></h2>
+                    <!-- <p>Fusce id sem at ligula laoreet hendrerit venenatis sed purus. Ut pellentesque maximus lacus, nec pharetra augue.</p> -->
+                </div>
+            </div>
+            <div class="row">
+                <div class="ed-course">
+
+
+                    {% for i in discover_link %}
+                    <div class="col-md-3 col-sm-4 col-xs-12" >
+                        <div class="ed-course-in" style="width: 100%; height: 150px;">
+                            <a class="course-overlay" href="/{{i.url}}">
+                                <img src="/media/{{i.image}}" alt="" width="500px" height="300px">
+                                <span>{{i.heading}}</span>
+                            </a>
+                        </div>
+                    </div>
+                    {% endfor %}
+
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+{% endblock %}

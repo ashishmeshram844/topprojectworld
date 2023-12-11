@@ -1,0 +1,119 @@
+{% extends 'studentapp/student_base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Edit Student Profile </title>
+<meta name="description" content="Student can Update their Profile and mentain theor profile properly.">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+{% block extra_css %}
+<style>
+    .input_size{
+        font-size: 20px;
+    }
+</style>
+
+{% endblock %}
+{% block dashboard_content %}
+
+<div class="udb">
+   
+    <div id="home" class="tab-pane fade active in">
+        <div class="box-inn-sp">
+            <div class="inn-title" style="background-color: black;">
+                <h4>Personal Detail</h4>
+                <p>Airtport Hotels The Right Way To Start A Short Break Holiday</p>
+            </div>
+            {% for i in messages %}
+            <h3 style="color: green;">{{i}}</h3>
+            {% endfor %}
+            <div class="bor">
+                <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="row">
+                        <div class="input-field col s12">
+                            <input  style="font-weight: bolder;font-size: 14px;" type="text" value="{{user.username}}" disabled class="validate ">
+                            <label class="">Username</label>
+                        </div>
+                        <div class="input-field col s12">
+                            <input style="font-weight: bolder;font-size: 14px;" type="email" value="{{user.email}}" disabled class="validate input_size">
+                            <label>Email</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="email" style="font-size: 14px;" name="optional_email" {% if user.student_account.optional_email %} value="{{user.student_account.optional_email}}" {% endif %}  class="validate input_size">
+                            <label>Optional Email</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="text" style="font-size: 14px;" {% if user.student_account.fullname %} value="{{user.student_account.fullname}}" {% endif %} required name="fullname" class="validate input_size">
+                            <label>Full Name</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="number" style="font-size: 14px;" {% if user.student_account.mobile %} value="{{user.student_account.mobile}}" {% endif %}  required name="mobile" class="validate input_size">
+                            <label>Mobile</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="number" style="font-size: 14px;" {% if user.student_account.optional_mobile %} value="{{user.student_account.optional_mobile}}" {% endif %}  name="optional_mobile" class="validate input_size">
+                            <label>Optional Mobile</label>
+                        </div>
+                        
+                        <div class="input-field col s12">
+                            <input type="text" style="font-size: 14px;" class="validate input_size" {% if user.student_account.address %} value="{{user.student_account.address}}" {% endif %}  required name="address">
+                            <label>Address</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="text" style="font-size: 14px;" {% if user.student_account.country %} value="{{user.student_account.country}}" {% endif %}  name="country"  required class="validate input_size">
+                            <label>Country</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="text" style="font-size: 14px;" {% if user.student_account.state %} value="{{user.student_account.state}}" {% endif %}  name="state" required class="validate input_size">
+                            <label>State</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="text" style="font-size: 14px;" {% if user.student_account.city %} value="{{user.student_account.city}}" {% endif %}  name="city" required class="validate input_size">
+                            <label>City</label>
+                        </div>
+
+                        <div class="input-field col s12">
+                            <input type="number" style="font-size: 14px;" {% if user.student_account.zipcode %} value="{{user.student_account.zipcode}}" {% endif %}  required name="zipcode" class="validate input_size">
+                            <label>Zip Code</label>
+                        </div>
+
+
+                    <!-- </div>
+                        <div class="row">
+                            <div class="input-field col s12">
+                                <select>
+                                <option value="" disabled selected>Select Status</option>
+                                <option value="1">Active</option>
+                                <option value="2">De-Active</option>
+                                <option value="3">Delete</option>
+                                </select>
+                            </div>
+                        </div> -->
+                    <div class="row">
+                        <center>
+                        <div class="input-field col s12">
+                            
+                            <i class="waves-effect waves-light btn-large waves-input-wrapper"><input type="submit" class="waves-button-input" value="UPDATE"></i>
+                        </div>
+                        </center>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+
+
+{% endblock %}

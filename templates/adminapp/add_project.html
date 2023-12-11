@@ -1,0 +1,267 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New Project</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="block-body">
+                   
+                    {% if pro %}
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_project' pro.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Select Project Catagory</label>
+                            <select required required class="form-control" name="sel_project_catagory">
+                                <option value="{{pro.sel_pro.sel_project_catagory.id}}" style="color: white;"  selected >{{pro.sel_project.sel_project_catagory.name}}</option>
+                                {% for i in pro_cat %}
+                                <option value="{{i.id}}" >{{i.name}}</option>
+                                {% endfor %}
+                            </select>
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Name</label>
+                            <input required type="text" placeholder=" Project name" name="name" value="{{pro.sel_project.name}}" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Thumnail</label>
+                            <input  type="file" placeholder=" Project thumnail" name="thumnail" class="form-control">
+                            <img src="/media/{{pro.sel_project.thumnail}}" width="100px" height="100px">
+                        </div>
+    
+                       
+                        <div class="form-group">
+                            <label class="form-control-label">Description</label>
+                            <textarea required placeholder="Enter Project Description" name="description" class="form-control">{{pro.sel_project.description}}</textarea>
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Databases</label>
+                            <input required type="text" value="{{pro.database}}" placeholder=" Enter Database Used" name="database" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Title</label>
+                            <input required type="text" value="{{pro.project_title}}" placeholder=" Project Title" name="project_title" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project type</label>
+                            <input required type="text" value="{{pro.project_type}}" placeholder=" Project type" name="project_type" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Price</label>
+                            <input required type="number" value="{{pro.price}}" placeholder=" Project Price" name="price" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Discount</label>
+                            <input required type="text" value="{{pro.discount}}" placeholder=" Project Discount" name="discount" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Help Line Number</label>
+                            <input required type="text" value="{{pro.helpline_number}}" placeholder=" Project helpline number" name="helpline_number" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project note</label>
+                            <input required type="text" value="{{pro.note}}" placeholder=" Project note" name="note" class="form-control">
+                            
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Synopsys</label><br>
+                            <a href="/media/{{pro.synopsys}}" target="_blank">Old File</a>
+                            <input  type="file" placeholder=" Project Synopsys" name="synopsys" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Report</label><br>
+                            <a href="/media/{{pro.report}}"  target="_blank">Old File</a>
+                            <input   type="file" placeholder=" Project report" name="report" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project Thesis</label><br>
+                            <a href="/media/{{pro.thesis}}" target="_blank">Old File</a>
+                            <input type="file" placeholder=" Project thesis" name="thesis" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project presentation</label><br>
+                            <a href="/media/{{pro.presentation}}" target="_blank">Old File</a>
+                            <input  type="file" placeholder=" Project presentation" name="presentation" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project setup Video</label><br>
+                            <a href="/media/{{pro.project_setup_video}}" target="_blank">Old File</a>
+                            <input  type="file" placeholder=" Project Setup video" name="project_setup_video" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project overview video</label><br>
+                            <a href="/media/{{pro.project_overview_video}}" target="_blank">Old File</a>
+                            <input  type="file" placeholder=" Project overview video" name="project_overview_video" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Project requirement File</label><br>
+                            <a href="/media/{{pro.project_requirement_file}}" target="_blank">Old File</a>
+                            <input  type="file" placeholder=" Project requirement file" name="project_requirement_file" class="form-control">
+                        </div>
+    
+    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE PROJECT" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+    
+                    {% else %}
+                    
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Select Project Catagory</label>
+                        <select required class="form-control" name="sel_project_catagory">
+                            <option value="#" disabled selected >-- Select Catagory --</option>
+                            {% for i in pro_cat %}
+                            <option value="{{i.id}}" >{{i.name}}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Name</label>
+                        <input required type="text" placeholder=" Project name" name="name" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Thumnail</label>
+                        <input required type="file" placeholder=" Project thumnail" name="thumnail" class="form-control">
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <label class="form-control-label">Description</label>
+                        <textarea required placeholder="Enter Project Description" name="description" class="form-control"></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Databases</label>
+                        <input required type="text" placeholder=" Enter Database Used" name="database" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Title</label>
+                        <input required type="text" placeholder=" Project Title" name="project_title" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project type</label>
+                        <input required type="text" placeholder=" Project type" name="project_type" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Price</label>
+                        <input required type="number" placeholder=" Project Price" name="price" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Discount</label>
+                        <input required type="text" placeholder=" Project Discount" name="discount" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Help Line Number</label>
+                        <input required type="text" placeholder=" Project helpline number" name="helpline_number" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project note</label>
+                        <input required type="text" placeholder=" Project note" name="note" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Synopsys</label>
+                        <input required type="file" placeholder=" Project Synopsys" name="synopsys" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Report</label>
+                        <input required  type="file" placeholder=" Project report" name="report" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project Thesis</label>
+                        <input type="file" placeholder=" Project thesis" name="thesis" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project presentation</label>
+                        <input required type="file" placeholder=" Project presentation" name="presentation" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project setup Video</label>
+                        <input required type="file" placeholder=" Project Setup video" name="project_setup_video" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project overview video</label>
+                        <input required type="file" placeholder=" Project overview video" name="project_overview_video" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Project requirement File</label>
+                        <input required type="file" placeholder=" Project requirement file" name="project_requirement_file" class="form-control">
+                    </div>
+
+
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="ADD Project" class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+                  {% endif %}
+
+               
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

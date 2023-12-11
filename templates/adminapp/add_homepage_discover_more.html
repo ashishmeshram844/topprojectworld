@@ -1,0 +1,101 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New Discover More Link</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="title"><strong class="d-block">Link should be</strong><span class="d-block">appname/url format.</span></div>
+                <div class="block-body">
+                    
+                    {% if discover %}
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_discover_more_link' discover.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                            <label class="form-control-label">heading</label>
+                            <input type="text" required placeholder="enter name" value="{{discover.heading}}" name="heading" class="form-control">
+                        </div>
+    
+                        <div class="form-group">
+                            <label class="form-control-label">Image</label>
+                            <input type="file" placeholder="image" name="image" class="form-control">
+                            <a href="/media/{{discover.image}}" target="_blank">
+                                <img src="/media/{{discover.image}}" width="100px" height="100px">
+                            </a>
+                        </div>
+    
+                       
+                        <div class="form-group">
+                            <label class="form-control-label">url</label>
+                            <input type="text" required placeholder="add url" value="{{discover.url}}" name="url" class="form-control">
+                        </div>
+                    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE DISCOVER MORE LINK" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+
+                    {% else %}
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">heading</label>
+                        <input type="text" required placeholder="enter name" name="heading" class="form-control">
+                    </div>
+
+                    <div class="form-group">
+                        <label class="form-control-label">Image</label>
+                        <input type="file" placeholder="image" name="image" class="form-control">
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <label class="form-control-label">url</label>
+                        <input type="text" required placeholder="add url" name="url" class="form-control">
+                    </div>
+
+                
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="ADD DISCOVER MORE LINK " class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+
+                  {% endif %}
+               
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

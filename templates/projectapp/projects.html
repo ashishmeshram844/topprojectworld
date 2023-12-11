@@ -1,0 +1,89 @@
+{% extends 'userapp/base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Computer Science Engineering Projects List </title>
+<meta name="description" content="Here all Type of projects related to Computer science Engineering are available">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+{% block extra_css %}
+
+<style>
+  
+.rainbow {
+	position: relative;
+	z-index: 0;
+	border-radius: 10px;
+	overflow: hidden;
+	padding: 2rem;
+}
+</style>
+
+
+{% endblock %}
+{% block main_content %}
+
+
+<section>
+    <div class="container com-sp pad-bot-10">
+        <div class="row">
+            <div class="con-title">
+                <h2>Projects <span>List</span></h2>
+                <p>We develop all type of softeare projects fast,efficient and secure code. Here all the projects are available you can search projects and find your project easily</p>
+            </div>
+        </div>
+
+        <div class="container">
+
+
+
+          {% for i in project %}
+              <div class="card mb-3 rainbow">
+                <div class="row no-gutters">
+                  <div class="col-md-4">
+                  <a href="{% url 'projects_detail' i.id %}"> <img src="/media/{{i.thumnail}}" class="card-img" alt="..." width="100%" ></a> 
+                  </div>
+                  <div class="col-md-8">
+                    <div class="card-body" style="padding: 20px;">
+                      <h5 class="card-title">{{i.name}}</h5>
+                      <p class="card-text">{{i.description|slice:":200"}}.</p>
+                      <p class="card-text"><small class="text-muted">{{i.created_date}}</small></p>
+                      <a href="{% url 'projects_detail' i.id %}" class="btn btn-warning" style="background-color: #e25f30;">View Detail</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              {% endfor %}
+
+        </div>
+        <br>
+        <center>
+     
+
+          <div class="pagination">
+            <span class="step-links">
+                {% if project.has_previous %}
+                    <a class="btn btn-primary" href="?page=1">&laquo; first</a>
+                    <a class="btn btn-success" href="?page={{ project.previous_page_number }}">previous</a>
+                {% endif %}
+        
+                <span class="current">
+                   <button class="btn btn-warning"> Page {{ project.number }} of {{ project.paginator.num_pages }}.</button>
+                </span>
+        
+                {% if project.has_next %}
+                    <a class="btn btn-success" href="?page={{ project.next_page_number }}">next</a>
+                    <a class="btn btn-primary" href="?page={{ project.paginator.num_pages }}">last &raquo;</a>
+                {% endif %}
+            </span>
+        </div>
+        </center>
+
+    </div>
+</section>
+
+{% endblock %}
+
+
+

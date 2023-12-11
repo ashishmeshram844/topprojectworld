@@ -1,0 +1,74 @@
+.sidebar{
+    position: fixed;
+    list-style: none;
+    text-decoration: none;
+    width: 250px;
+    height: 500px;
+    left: -250px;
+    color: white;
+    background-color: black;
+
+}
+
+.sidebar header{
+    font-size: 22px;
+    color: white;
+    text-align: center;
+    line-height: 70px;
+    background: #e25f30;
+    user-select: none;
+
+}
+
+
+.sidebar ul a{
+    display: block;
+    height: 100%;
+    width: 100%;
+    line-height: 60px;
+    font-size: 20px;
+    color: white;
+    padding-left: 40px;
+    box-sizing: border-box;
+    border-top: 1px solid #e25f30;
+    border-bottom: 1px solid #e25f30;
+    transition: .6s;
+
+}
+
+
+ul li:hover a{
+    padding-left: 50px;
+
+}
+
+
+#check{
+    display: none;
+}
+
+
+label #btn,label #cancel{
+    position: absolute;
+    cursor: pointer;
+    font-size: 35px;
+    color: coral;
+    padding:6px 12px;
+}
+
+
+label #cancel{
+    z-index: 1111;
+    left: 195px;
+    top: 17px;
+    font-size: 30px;
+    color: #e25f30;
+    padding: 4px 9px;
+}
+
+
+
+#check:checked ~ .sidebar{
+    left: 0;
+
+}

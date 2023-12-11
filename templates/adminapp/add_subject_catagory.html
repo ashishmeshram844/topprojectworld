@@ -1,0 +1,88 @@
+{% extends 'adminapp/admin_base.html' %}
+
+{% block content %}
+
+    <!-- Page Header-->
+    <div class="page-header no-margin-bottom">
+        <div class="container-fluid">
+          <h2 class="h5 no-margin-bottom">Add New Subject Catagory</h2>
+        </div>
+      </div>
+      <!-- Breadcrumb-->
+      <div class="container-fluid">
+        <center>
+        <ul class="breadcrumb">
+          
+          {% for i in messages %}
+          <h4 style="color: green;">{{i}}</h4>
+          {% endfor %}
+          
+        </ul>
+        </center>
+      </div>
+      <section class="no-padding-top">
+        <div class="container-fluid">
+          <div class="row">
+            <!-- Basic Form-->
+            <div class="col-lg-12">
+              <div class="block">
+                <div class="block-body">
+                    
+                    {% if sub_cat %}
+
+                    <form method="POST" enctype="multipart/form-data" action="{% url 'update_sub_cat' sub_cat.id %}">
+                        {% csrf_token %}
+    
+                        <div class="form-group">
+                          <label class="form-control-label">Subject Catagory Name</label>
+                          <input type="text"  value="{{sub_cat.name}}" placeholder="subject catagory name" name="name" class="form-control">
+                      </div>
+  
+                     
+                      <div class="form-group">
+                          <label class="form-control-label">Description</label>
+                          <textarea placeholder="Enter subject Catagory Description" name="description" class="form-control">{{sub_cat.description}}</textarea>
+                      </div>
+    
+                    
+                        <center>
+                        <div class="form-group">       
+                          <input type="submit" value="UPDATE SUBJECT CATAGORY" class="btn btn-primary">
+                        </div>
+                        </center>
+                      </form>
+
+                    {% else %}
+                  <form method="POST" enctype="multipart/form-data">
+                    {% csrf_token %}
+
+                    <div class="form-group">
+                        <label class="form-control-label">Subject Catagory Name</label>
+                        <input type="text" placeholder="subject catagory name" name="name" class="form-control">
+                    </div>
+
+                   
+                    <div class="form-group">
+                        <label class="form-control-label">Description</label>
+                        <textarea placeholder="Enter subject Catagory Description" name="description" class="form-control"></textarea>
+                    </div>
+
+                
+                    <center>
+                    <div class="form-group">       
+                      <input type="submit" value="ADD SUBJECT CATAGORY" class="btn btn-primary">
+                    </div>
+                    </center>
+                  </form>
+
+                  {% endif %}
+               
+                </div>
+              </div>
+            </div>
+                       
+          </div>
+        </div>
+      </section>
+
+{% endblock %}

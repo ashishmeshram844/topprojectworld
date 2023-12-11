@@ -1,0 +1,60 @@
+{% extends 'studentapp/student_base.html' %}
+{% load static %}
+
+{% block page_title %}
+<title>TOPPROJECTWORLD - Purchased Projects </title>
+<meta name="description" content="Here all purchased Project list is shown anytime user can download the project resources from here.">
+<meta name="keyword" content="{{keyword.keyward}}">
+{% endblock %}
+{% block dashboard_content %}
+
+
+<div class="udb">
+
+    <div class="udb-sec udb-prof">
+        <h4><img src="images/icon/db1.png" alt="" /> My Purchased Projects</h4>
+        <p>Here all Your Purchased Projects are available you can see payment detail and project detail like coding file,requirement file,installation video you have to only click on Project detail.</p>
+    </div>
+    
+    <div class="pro-con-table">
+        <table id="example" class="table table-responsive" style="width:100%">
+            <thead>
+                <tr>
+                    <th>Project Name</th>
+                    <th>Paid Amount</th>
+                    
+                    <th>Purchased Date</th>
+                  
+                    <!-- <th>Payment Detail</th> -->
+                    <th>Project Detail</th>
+                </tr>
+            </thead>
+            <tbody>
+
+              {% for i in pur_project %}
+                <tr>
+                    <td>{{i.project_name}}</td>
+                   <td>{{i.paid_amount}}</td>
+                   
+                    <td>{{i.created_date}} </td>
+                   
+                 
+
+                    <td>
+                        <a href="{% url 'purchased_project_detail' i.id %}" class="btn btn-warning">Project Detail</a>
+                    </td>
+
+                </tr>
+                {% endfor %}
+
+                </tbody>
+                </table>
+    </div>
+    
+</div>
+
+
+
+
+
+{% endblock %}
